@@ -66,5 +66,35 @@ function printBookDetails(book: Book): void {
   console.log(`Title: ${book.title}, Author: ${book.author}, Published: ${book.publishedYear}, Available: ${available}`);
 }
 
+function getUniqueValues(array1: (string | number)[], array2: (string | number)[]): (string | number)[] {
+  const result: (string | number)[] = [];
+  
+  // Helper function to check if a value already exists in result array
+  const isValueInArray = (value: string | number, arr: (string | number)[]): boolean => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === value) {
+        return true;
+      }
+    }
+    return false;
+  };
+  
+  // Add values from first array
+  for (let i = 0; i < array1.length; i++) {
+    if (!isValueInArray(array1[i], result)) {
+      result[result.length] = array1[i];
+    }
+  }
+  
+  // Add values from second array
+  for (let i = 0; i < array2.length; i++) {
+    if (!isValueInArray(array2[i], result)) {
+      result[result.length] = array2[i];
+    }
+  }
+  
+  return result;
+}
+
 
 
