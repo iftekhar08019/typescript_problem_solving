@@ -96,5 +96,28 @@ function getUniqueValues(array1: (string | number)[], array2: (string | number)[
   return result;
 }
 
+interface Product {
+  name: string;
+  price: number;
+  quantity: number;
+  discount?: number;
+}
+
+function calculateTotalPrice(products: Product[]): number {
+  return products
+    .map(product => {
+      const baseTotal = product.price * product.quantity;
+      if (typeof product.discount === 'number' && product.discount > 0) {
+        const discountFraction = product.discount / 100;
+        const discountAmount = baseTotal * discountFraction;
+        return baseTotal - discountAmount;
+      }
+      return baseTotal;
+    })
+    .reduce((total, productTotal) => total + productTotal, 0);
+}
+
+
+
 
 
